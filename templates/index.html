@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Directory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        .folder {
+            color: #007bff;
+            font-weight: bold;
+        }
+        .file {
+            color: #555;
+        }
+        .folder:hover, .file:hover {
+            background: #f9f9f9;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>File Directory</h1>
+    <ul>
+        {% for entry in directory %}
+            <li class="{{ entry.type }}">
+                <form action="/access" method="post" style="display: inline;">
+                    <input type="hidden" name="item_name" value="{{ entry.name }}">
+                    <button type="submit" style="background: none; border: none; color: inherit; font: inherit; cursor: pointer;">{{ entry.name }}</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

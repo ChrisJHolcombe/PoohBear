@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessed Item</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .content {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        .folder {
+            color: #007bff;
+            font-weight: bold;
+        }
+        .file {
+            color: #555;
+        }
+        .folder:hover, .file:hover {
+            background: #f9f9f9;
+            cursor: pointer;
+        }
+        pre {
+            background: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Accessed Item</h1>
+    <div class="content">
+        <p><strong>Item Name:</strong> {{ item_name }}</p>
+        {% if file_content %}
+            <h3>File Content:</h3>
+            <pre>{{ file_content }}</pre>
+        {% elif directory %}
+            <h3>Folder Contents:</h3>
+            <ul>
+                {% for entry in directory %}
+                    <li class="{{ entry.type }}">
+                        <form action="/access" method="post" style="display: inline;">
+                            <input type="hidden" name="item_name" value="{{ entry.name }}">
+                            <button type="submit" style="background: none; border: none; color: inherit; font: inherit; cursor: pointer;">{{ entry.name }}</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>This item cannot be displayed.</p>
+        {% endif %}
+        <p><a href="/">Back to Directory</a></p>
+    </div>
+</body>
+</html>

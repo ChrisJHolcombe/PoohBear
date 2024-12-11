@@ -1,0 +1,1 @@
+Welcome to the honeypot! Nothing here is real.
